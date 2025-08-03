@@ -1,4 +1,5 @@
 import {
+  AddItemDto,
   CartDataSource,
   CartEntity,
   CustomError,
@@ -16,7 +17,7 @@ export class AddItem implements AddItemUseCase {
     private productDataSource: ProductDataSource,
   ) {}
 
-  async execute(userId: string, item: Item): Promise<CartEntity> {
+  async execute(userId: string, item: AddItemDto): Promise<CartEntity> {
     const response = await this.productDataSource.findProductById(
       item.productId,
     );

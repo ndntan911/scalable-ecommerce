@@ -1,0 +1,24 @@
+# Ignore local node modules (important!)
+node_modules
+
+# Ignore local build output
+dist
+
+# Ignore environment files if you're mounting them with volumes
+.env
+
+# Ignore log files
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# OS / editor-specific files
+.DS_Store
+*.swp
+*.swo
+*.bak
+
+# Ignore test coverage and temp files
+coverage
+*.log
+tmp/

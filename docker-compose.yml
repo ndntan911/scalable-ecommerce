@@ -78,6 +78,8 @@ services:
       - ./notification-service/.env:/app/.env
     networks:
       - ecommerce-network
+    depends_on:
+      - kafka
 
   payment-service:
     build:
@@ -105,16 +107,16 @@ services:
 
   # Kafka
   zooper:
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:7.4.3
     container_name: zooper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     networks:
       - ecommerce-network
-    
+
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:7.4.3
     container_name: kafka
     depends_on:
       - zooper
@@ -130,7 +132,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - ecommerce-network
-    
+
   # Databases
   user-mongodb:
     image: mongo:latest

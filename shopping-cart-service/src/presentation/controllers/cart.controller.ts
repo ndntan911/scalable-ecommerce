@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { ErrorHandlerService } from '../';
-import { CartRepository, ProductRepository } from '../../domain';
+import { AddItemDto, CartRepository, ProductRepository } from '../../domain';
 import {
   AddItem,
   ClearCart,
@@ -19,8 +19,14 @@ export class CartController {
     const { userId } = req.params;
     const item = req.body;
 
+    const { errors, validatedData } = AddItemDto.addItem(item);
+    if (errors) {
+      res.status(400).json({ errors });
+      return;
+    }
+
     new AddItem(this.cartRepository, this.productRepository)
-      .execute(userId, item)
+      .execute(userId, validatedData!)
       .then((cart) => res.status(201).json(cart))
       .catch((error) => ErrorHandlerService.handleError(error, res));
   };

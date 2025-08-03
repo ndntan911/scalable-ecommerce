@@ -6,3 +6,5 @@ export * from './errors/custom.error';
 export * from './entitites/cart.entity';
 export * from './interfaces/item.interface';
 export * from './interfaces/product.interface';
+export * from './interfaces/validation.interfaces';
+export * from './dtos/cart/add-item';
