@@ -22,10 +22,10 @@ export class OrderRoutes {
       productRepository,
     );
 
-    router.post('/', orderController.createOrder);
+    router.post('/:userId', orderController.createOrder);
     router.get('/:userId/:orderId', orderController.getOrder);
     router.get('/:userId', orderController.getOrders);
-    router.put('/:orderId', orderController.updateOrder);
+    router.put('/:userId/:orderId', orderController.updateOrder);
 
     return router;
   }

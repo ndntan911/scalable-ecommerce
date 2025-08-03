@@ -24,15 +24,15 @@ export class CreateOrder implements CreateOrderUseCase {
         );
         const product = await response.json();
 
-        if (
-          !product ||
-          product.inventory < item.quantity ||
-          product.price !== item.price
-        ) {
+        if (!product || product.inventory < item.quantity) {
           return false;
         }
 
-        return product;
+        return {
+          ...product,
+          productId: item.productId,
+          quantity: item.quantity,
+        };
       }),
     );
 
@@ -40,13 +40,14 @@ export class CreateOrder implements CreateOrderUseCase {
       throw CustomError.badRequest('Some products are not available');
     }
 
-    const totalAmount = createOrderDto.items.reduce(
+    const totalAmount = reviewedProducts.reduce(
       (acc, item) => acc + item.price * item.quantity,
       0,
     );
 
     const order = await this.orderRepository.createOrder({
-      ...createOrderDto,
+      userId: createOrderDto.userId,
+      items: reviewedProducts,
       totalAmount,
     });
 

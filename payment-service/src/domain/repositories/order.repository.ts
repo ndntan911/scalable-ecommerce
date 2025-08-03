@@ -1,6 +1,10 @@
 import { CheckoutDto } from '../';
 
 export abstract class OrderRepository {
-  abstract createOrder(checkoutDto: CheckoutDto): Promise<Response>;
-  abstract updateOrder(orderId: string, address: string): Promise<Response>;
+  abstract getOrder(checkoutDto: CheckoutDto): Promise<Response>;
+  abstract updateOrder(
+    userId: string,
+    orderId: string,
+    address: string,
+  ): Promise<Response>;
 }

@@ -3,13 +3,13 @@ import { createOrderDtoSchema, ZodAdapter } from '../../../config';
 
 interface CreateOrderDtoProps {
   userId: string;
-  items: Item[];
+  items: Pick<Item, 'productId' | 'quantity'>[];
 }
 
 export class CreateOrderDto {
   constructor(
     public userId: string,
-    public items: Item[],
+    public items: Pick<Item, 'productId' | 'quantity'>[],
   ) {}
 
   static create(props: CreateOrderDtoProps): ValidationResult<CreateOrderDto> {

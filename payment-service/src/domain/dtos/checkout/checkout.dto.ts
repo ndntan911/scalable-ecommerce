@@ -1,14 +1,14 @@
 import { checkoutSchema, ZodAdapter } from '../../../config';
-import { Item, ValidationResult } from '../../';
+import { ValidationResult } from '../../';
 
 interface CheckoutDtoProps {
   userId: string;
-  items: Item[];
+  orderId: string;
 }
 
 export class CheckoutDto {
   private constructor(
-    public readonly items: Item[],
+    public readonly orderId: string,
     public readonly userId: string,
   ) {}
 

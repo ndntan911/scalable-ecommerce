@@ -49,6 +49,7 @@ export class Webhook implements WebhookUseCase {
 
     if (event.type === 'checkout.session.completed') {
       const response = await this.orderRepository.updateOrder(
+        session?.metadata?.userId as string,
         session?.metadata?.orderId as string,
         addressString,
       );

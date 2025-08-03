@@ -7,9 +7,7 @@ export const createOrderDtoSchema: z.ZodType<CreateOrderDto> = z.object({
     .array(
       z.object({
         productId: z.string(),
-        name: z.string(),
         quantity: z.number(),
-        price: z.number(),
       }),
     )
     .min(1, 'Items must have at least one product'),

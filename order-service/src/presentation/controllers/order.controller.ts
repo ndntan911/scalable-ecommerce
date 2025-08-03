@@ -15,7 +15,12 @@ export class OrderController {
   ) {}
 
   createOrder = (req: Request, res: Response) => {
-    const { errors, validatedData } = CreateOrderDto.create(req.body);
+    const { userId } = req.params;
+    const data = {
+      ...req.body,
+      userId,
+    };
+    const { errors, validatedData } = CreateOrderDto.create(data);
 
     if (errors) {
       res.status(400).json({ errors });

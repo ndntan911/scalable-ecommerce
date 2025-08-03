@@ -77,15 +77,6 @@ app.use(
 
 // Order routes
 app.use(
-  '/order/:orderId',
-  checkJwt,
-  createProxy(
-    services.order,
-    (req: RequestExt) =>
-      `${services.order}/order/${req.user?.id}/${req.params.orderId}`,
-  ),
-);
-app.use(
   '/order',
   checkJwt,
   createProxy(

@@ -9,6 +9,7 @@ export class StripeServiceImpl implements StripeService {
   async createCheckoutSession(
     items: Item[],
     orderId: string,
+    userId: string,
   ): Promise<string | null> {
     const { url } = await this.stripe.checkout.sessions.create({
       line_items: items.map(({ name, price, quantity }) => ({
@@ -30,6 +31,7 @@ export class StripeServiceImpl implements StripeService {
       cancel_url: 'https://example.com/cancel',
       metadata: {
         orderId: orderId,
+        userId: userId,
       },
     });
 

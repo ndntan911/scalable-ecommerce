@@ -1,6 +1,10 @@
-import { CheckoutDto } from '../';
+import { CheckoutDto } from '../dtos/checkout/checkout.dto';
 
 export abstract class OrderDataSource {
-  abstract createOrder(checkoutDto: CheckoutDto): Promise<Response>;
-  abstract updateOrder(orderId: string, address: string): Promise<Response>;
+  abstract getOrder(checkoutDto: CheckoutDto): Promise<Response>;
+  abstract updateOrder(
+    userId: string,
+    orderId: string,
+    address: string,
+  ): Promise<Response>;
 }

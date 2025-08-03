@@ -3,11 +3,15 @@ import { CheckoutDto, OrderDataSource, OrderRepository } from '../../domain';
 export class OrderRepositoryImpl implements OrderRepository {
   constructor(private readonly orderDataSource: OrderDataSource) {}
 
-  createOrder(checkoutDto: CheckoutDto): Promise<Response> {
-    return this.orderDataSource.createOrder(checkoutDto);
+  getOrder(checkoutDto: CheckoutDto): Promise<Response> {
+    return this.orderDataSource.getOrder(checkoutDto);
   }
 
-  updateOrder(orderId: string, address: string): Promise<Response> {
-    return this.orderDataSource.updateOrder(orderId, address);
+  updateOrder(
+    userId: string,
+    orderId: string,
+    address: string,
+  ): Promise<Response> {
+    return this.orderDataSource.updateOrder(userId, orderId, address);
   }
 }

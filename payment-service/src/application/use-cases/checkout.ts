@@ -22,7 +22,7 @@ export class Checkout implements CheckoutUseCase {
   ) {}
 
   async execute(checkoutDto: CheckoutDto): Promise<CheckoutResponse> {
-    const response = await this.orderRepository.createOrder(checkoutDto);
+    const response = await this.orderRepository.getOrder(checkoutDto);
 
     if (!response.ok) {
       const { error } = await response.json();
@@ -32,8 +32,9 @@ export class Checkout implements CheckoutUseCase {
     const order = await response.json();
 
     const url = await this.stripeService.createCheckoutSession(
-      checkoutDto.items,
+      order.items,
       order.id,
+      checkoutDto.userId,
     );
 
     if (!url) {
